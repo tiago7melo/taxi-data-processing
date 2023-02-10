@@ -1,0 +1,25 @@
+- usando as tracks, fazer um mapa como os da cidade mas por concelho
+
+
+
+
+Query do prof aula(21/05/2021):
+
+Select N, st_distance(st_pointn(proj_track,N), st_pointn(proj_track,N+1)) 
+    as D from tracks, (select generate_series(1,st_numpoints(proj_track)-1))
+        as N from tracks where id=1) as x
+            where id=1;
+
+
+# para cada track mostrar o concelho que ela se inicia
+Select concelho,tracks.id from tracks, cont_aad_caop2018
+    where state='BUSY'
+    and
+    st_within(st_startpoint(proj_track),proj_boundary);
+
+
+
+
+
+
+
